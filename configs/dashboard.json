@@ -1,0 +1,11 @@
+{
+  "settings": {
+    "offset": {
+      "top": 30,
+      "right": 30,
+      "bottom": 30,
+      "left": 30
+    },
+    "maxWidth": 1200
+  }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smart</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="/resources/_output/web.css" rel="stylesheet">
+    <script src="/resources/_output/web.js"></script>
+    <style>
+        .grid-container {
+            max-width: {{ context.dashboard.settings.maxWidth }}px;
+            margin: {{ context.dashboard.settings.offset.top }}px
+            {{ context.dashboard.settings.offset.right }}px
+            {{ context.dashboard.settings.offset.bottom }}px
+            {{ context.dashboard.settings.offset.left }}px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        {% for row in context.grid.rows %}
+            <div class="row">
+                {% for item in row %}
+                    {% set moduleTemplatePath = '@'~item.module~'/item.twig' %}
+                    {% include moduleTemplatePath %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

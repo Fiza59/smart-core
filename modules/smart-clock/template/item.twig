@@ -1,0 +1,10 @@
+{% extends '@core/item.twig' %}
+
+{% block elementCls %}{{ item.module }} size-{{ item.size }}{% endblock %}
+
+{% block content %}
+    <div class="col">
+        <h1 class="current-time"></h1>
+        <h1 class="current-date"></h1>
+    </div>
+{% endblock %}
