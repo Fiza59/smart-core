@@ -1,0 +1,43 @@
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+    .grid-item {
+        margin: 1rem 2rem;
+        flex-grow: 1;
+        &.size-3 {
+            width: 100%;
+        }
+        &.size-2 {
+            width: 50%;
+        }
+        &.size-1 {
+            width: 33.3332%;
+        }
+        .content {
+            display: flex;
+            .row {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+                &.center-y {
+                    align-items: center;
+                }
+                &.center-x {
+                    justify-content: center;
+                }
+            }
+            .col {
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+            }
+        }
+    }
+}

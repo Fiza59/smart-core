@@ -1,0 +1,11 @@
+{% extends '@core/item.twig' %}
+
+{% block elementCls %}{{ item.module }} size-{{ item.size }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="current-temperature"></h1>
+        <h2 class="current-position"></h2>
+        <div class="forecast-container row"></div>
+    </div>
+{% endblock %}
