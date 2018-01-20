@@ -21,7 +21,7 @@ The next file you should be interested to is the "configs/system.json". There yo
 ### 4. Install your first module
 To see something in your mirror you have to install a module. For example the "smart-clock". This is a step by step guide to do this.
 1. Open your Terminal and go to your webserver directory where the smart core files are located and enter this command 
-```php console.php -install smart-clock https://github.com/smartwebtools/smart-clock```
+```php console.php -install smart-clock https://github.com/smartwebtools/smart-clock/archive/master.zip```
 This Command will download and install the module for you.
 2. Add the module to the grid of your mirror by edit this fie "configs/grid.json"
     ``` json
@@ -38,8 +38,8 @@ This Command will download and install the module for you.
     ```
 3. Now just reload your website and the module e.g. the "smart-clock" should be visible.
 ## Available modules
-- Smart Weather https://github.com/frederikdengler/smart-weather
-- Smart Clock https://github.com/frederikdengler/smart-clock
+- Smart Weather https://github.com/smartwebtools/smart-weather
+- Smart Clock https://github.com/smartwebtools/smart-clock
 
 ## Create a module
 Yes you can create a module for your and other smart mirrors! All you have to do is just follow a few rules and publish your module so everyone can install and use it.
@@ -53,5 +53,5 @@ To install a new module use this:
 ```
 php console.php -install <modulename> <source>
 #smart-weather example
-php console.php -install smart-weather https://github.com/frederikdengler/smart-weather/archive/master.zip
+php console.php -install smart-weather https://github.com/smartwebtools/smart-weather/archive/master.zip
 ```
