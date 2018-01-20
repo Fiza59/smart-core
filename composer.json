@@ -11,19 +11,5 @@
         "filp/whoops": "2.*",
         "leafo/lessphp": "0.4.0",
         "tedivm/jshrink": "~1.0"
-    },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "example-package-name",
-                "version": "1.0",
-                "source": {
-                    "url": "https://github.com/example-package-name.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
-    ]
+    }
 }

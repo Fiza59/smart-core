@@ -1,4 +1,8 @@
 {
   "sleep": 30,
-  "mode": "DEVELOPMENT"
+  "mode": "DEVELOPMENT",
+  "modules": [
+    "smart-clock",
+    "smart-weather"
+  ]
 }

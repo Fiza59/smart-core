@@ -18,7 +18,10 @@ $system = $reader->get(CONFIGS_ROOT . '/system.json')->parse();
 $dashboard = $reader->get(CONFIGS_ROOT . '/dashboard.json')->parse();
 
 $context = new Context();
-$context = $context->createContext($gridRows, $system['mode'], $dashboard);
+$context = $context->createContext($gridRows, $system, $dashboard);
+
+$system = new System($context);
+$system->updateSystem();
 
 $less = new Compiler();
 $less->compile($context)->saveCode();
@@ -32,22 +35,64 @@ try {
 } catch (Throwable $e) {
 }
 
+class System
+{
+    private $context;
+
+    public function __construct($context)
+    {
+        $this->context = $context;
+    }
+
+    public function updateSystem()
+    {
+        $this->moduleUpdatesAvailable();
+    }
+
+    public function moduleUpdatesAvailable()
+    {
+        //https://github.com/frederikdengler/smart-clock/archive/master.zip
+        foreach ($this->context['system']['modules'] as $module) {
+            $url = 'https://github.com/frederikdengler/' . $module . '/archive/master.zip';
+            $headers = @get_headers($url);
+            if (strpos($headers[0], '404') === false) {
+
+                $file = fopen($module . '.zip', "w+");
+
+                if (flock($file, LOCK_EX)) {
+                    fwrite($file, fopen($url, 'r'));
+                    $zip = new ZipArchive;
+                    $res = $zip->open($module . '.zip');
+                    if ($res === TRUE) {
+                        $zip->extractTo(MODULES_ROOT . '/' . $module);
+                        $zip->close();
+                    }
+
+                    flock($file, LOCK_UN);
+                }
+
+            } else {
+                //log errors
+            }
+        }
+    }
+}
 
 class Context
 {
     /** @var array $grid */
     protected $grid;
-    /** @var string $mode */
-    protected $mode;
+    /** @var array $system */
+    protected $system;
     /** @var array $modules */
     protected $modules;
     /** @var array $dashboard */
     protected $dashboard;
 
-    public function createContext($gridRows, $mode, $dashboard)
+    public function createContext($gridRows, $system, $dashboard)
     {
         $this->grid = $gridRows;
-        $this->mode = $mode;
+        $this->system = $system;
         $this->dashboard = $dashboard;
         $this->getUsedModules($gridRows);
 
@@ -224,7 +269,7 @@ class Compiler
 
         try {
             foreach ($jsList as $js) {
-                if(is_file($js)) {
+                if (is_file($js)) {
                     $code = file_get_contents($js);
 
                     if (!empty($code)) {
@@ -247,7 +292,7 @@ class Compiler
                 $list[] = MODULES_ROOT . '/' . $module . '/src/js/' . $file;
             }
 
-            if(is_file(MODULES_ROOT . '/' . $module . '/src/js/app.js')) {
+            if (is_file(MODULES_ROOT . '/' . $module . '/src/js/app.js')) {
                 $list[] = MODULES_ROOT . '/' . $module . '/src/js/app.js';
             }
         }
