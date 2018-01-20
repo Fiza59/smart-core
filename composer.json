@@ -1,0 +1,12 @@
+{
+    "name": "smart/core",
+    "authors": [
+        {
+            "name": "Frederik Dengler",
+            "email": "frederikdengler@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "2.4.*"
+    }
+}

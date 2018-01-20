@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "size": 3,
+      "module": "smart-clock"
+    }, {
+      "size": 1,
+      "module": "smart-clock"
+    }
+  ]
+}
