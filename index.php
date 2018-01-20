@@ -20,9 +20,6 @@ $dashboard = $reader->get(CONFIGS_ROOT . '/dashboard.json')->parse();
 $context = new Context();
 $context = $context->createContext($gridRows, $system, $dashboard);
 
-$system = new System($context);
-$system->updateSystem();
-
 $less = new Compiler();
 $less->compile($context)->saveCode();
 
@@ -33,49 +30,6 @@ try {
 } catch (Twig_Error_Runtime $e) {
 } catch (Twig_Error_Syntax $e) {
 } catch (Throwable $e) {
-}
-
-class System
-{
-    private $context;
-
-    public function __construct($context)
-    {
-        $this->context = $context;
-    }
-
-    public function updateSystem()
-    {
-        $this->moduleUpdatesAvailable();
-    }
-
-    public function moduleUpdatesAvailable()
-    {
-        //https://github.com/frederikdengler/smart-clock/archive/master.zip
-        foreach ($this->context['system']['modules'] as $module) {
-            $url = 'https://github.com/frederikdengler/' . $module . '/archive/master.zip';
-            $headers = @get_headers($url);
-            if (strpos($headers[0], '404') === false) {
-
-                $file = fopen($module . '.zip', "w+");
-
-                if (flock($file, LOCK_EX)) {
-                    fwrite($file, fopen($url, 'r'));
-                    $zip = new ZipArchive;
-                    $res = $zip->open($module . '.zip');
-                    if ($res === TRUE) {
-                        $zip->extractTo(MODULES_ROOT . '/' . $module);
-                        $zip->close();
-                    }
-
-                    flock($file, LOCK_UN);
-                }
-
-            } else {
-                //log errors
-            }
-        }
-    }
 }
 
 class Context
