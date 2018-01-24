@@ -1,0 +1,19 @@
+[
+  {
+    "module": "smart-weather",
+    "releases": [
+      {
+        "release": "1.0.0",
+        "source": "https://github.com/smartwebtools/smart-weather/archive/1.0.0.zip"
+      }
+    ]
+  }, {
+    "module": "smart-clock",
+    "releases": [
+      {
+        "release": "1.0.0",
+        "source": "https://github.com/smartwebtools/smart-clock/archive/1.0.0.zip"
+      }
+    ]
+  }
+]

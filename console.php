@@ -3,11 +3,11 @@
 const P = "\n";
 const DP = "\n\n";
 define('MODULES_ROOT', __DIR__ . '/modules');
+define('CONFIGS_ROOT', __DIR__ . '/configs');
 
 echo P . colorize("Smart cli tools. Smart is a magic mirror software for", "NOTE");
-echo P . colorize("everyone. For all available functions use -listfunctions", "NOTE");
+echo P . colorize("everyone. For all available functions use -listfunctions", "NOTE") . DP;
 
-echo DP . colorize("YOUR INPUT: " . $argv[0] . " " . $argv[1] . " " . $argv[2] . " " . $argv[3], "NOTE") . DP;
 if(empty($argv[1])) {
     echo "\n\nNo Command given please look in the list below:\n\n";
     listFunctions();
@@ -19,15 +19,28 @@ if(empty($argv[1])) {
 }
 
 function listFunctions() {
-    echo "All functions in this script: \n";
+    echo "All functions in this script: " . P;
 
     $functions = [
-        '-install <modulname> <source>',
+        '-install <modulname> <version>',
+        '-listmodules'
     ];
 
     foreach ($functions as $function) {
         if(!in_array($function, ['colorize'])) {
-            echo "\t" . $function . "\n";
+            echo "\t" . $function . P;
+        }
+    }
+}
+
+function listModules()
+{
+    $modules = file_get_contents(CONFIGS_ROOT . '/modules.json');
+
+    foreach (json_decode($modules, true) as $module) {
+        echo colorize($module['module'], "NOTE") . P;
+        foreach ($module['releases'] as $release) {
+            echo 'Release: ' . $release['release'] . DP;
         }
     }
 }
@@ -36,15 +49,17 @@ function install($argv) {
     echo "Install new Module" . DP;
 
     if(empty($argv[2]) || empty($argv[3])) {
-        echo "Please provide <modulename> and <source>!" . P;
+        echo "Please provide <modulename> and <version>!" . P;
         return;
     }
 
     $moduleName = $argv[2];
-    $moduleSource = $argv[3];
+    $moduleSource = 'https://github.com/smartwebtools/' . $moduleName . '/archive/' . $argv[3] . '.zip';
 
-    echo "Module name: " . $argv[2] . P;
-    echo "Source url: " . $argv[3] . P;
+    echo "Module: " . $argv[2] . P;
+    echo "Version: " . $argv[3] . P;
+
+    //TODO Test url before removing anything
 
     if(is_dir(MODULES_ROOT . '/' . $moduleName)) {
         echo colorize("DIRECTORY NOT EMPTY IT WILL BE REMOVED NOW!", "NOTE") . DP;
@@ -54,8 +69,8 @@ function install($argv) {
     downloadZipFile($moduleSource, $moduleName);
     extractModule($moduleName);
 
-    if(is_dir(MODULES_ROOT . '/' . $moduleName . '-master')) {
-        rename(MODULES_ROOT . '/' . $moduleName . '-master', MODULES_ROOT . '/' .  $moduleName);
+    if(is_dir(MODULES_ROOT . '/' . $moduleName . '-' . $argv[3])) {
+        rename(MODULES_ROOT . '/' . $moduleName . '-' . $argv[3], MODULES_ROOT . '/' .  $moduleName);
     }
 
     echo colorize($moduleName . " was installed successfully!", "SUCCESS") . P;
@@ -92,16 +107,16 @@ function colorize($text, $status) {
     $out = "";
     switch($status) {
         case "SUCCESS":
-            $out = "[32m"; //Green background
+            $out .= "[32m"; //Green background
             break;
         case "FAILURE":
-            $out = "[41m"; //Red background
+            $out .= "[41m"; //Red background
             break;
         case "WARNING":
-            $out = "[43m"; //Yellow background
+            $out .= "[43m"; //Yellow background
             break;
         case "NOTE":
-            $out = "[44m"; //Blue background
+            $out .= "[94m"; //Blue background
             break;
         default:
             new \Exception("Invalid status: " . $status);
