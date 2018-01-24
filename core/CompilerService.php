@@ -24,6 +24,8 @@ class CompilerService
     {
         $less = new \lessc();
 
+        $less->setFormatter("compressed");
+
         $lessList = [
             RESOURCE_DIR . '/less/all.less',
             RESOURCE_DIR . '/less/reset.css'
@@ -35,7 +37,7 @@ class CompilerService
             foreach ($lessList as $file) {
                 $this->cssCode .= $less->compileFile($file);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
