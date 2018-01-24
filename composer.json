@@ -6,6 +6,11 @@
             "email": "frederikdengler@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "core\\": "core"
+        }
+    },
     "require": {
         "twig/twig": "2.4.*",
         "filp/whoops": "2.*",
