@@ -1,5 +1,14 @@
 # Smart Core
 "Smart Core" is the basic software for running a magic mirror. Modules can extend the system. Just feel free to create a module or support the project.
+## Release Notes
+### Release 1.0.0
+- Basic application
+- simple add modules for more features on magic mirror display
+### Release 1.0.1
+- changes for console.php
+- directory structure
+- documentation for anything
+
 ## Installation on Raspberry PI
 ### 1. Clone the repository
 Go to your webserver folder e.g. "/var/www/html"
