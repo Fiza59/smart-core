@@ -4,7 +4,7 @@
 ### Release 1.0.0
 - Basic application
 - simple add modules for more features on magic mirror display
-### Release 1.0.1
+### Release 1.0.1 (upcoming)
 - changes for console.php
 - directory structure
 - documentation for anything
