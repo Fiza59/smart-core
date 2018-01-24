@@ -2,17 +2,7 @@
   "rows": [
     [{
       "size": 1,
-      "module": "smart-clock"
-    }, {
-      "size": 1,
-      "module": "smart-weather"
-    }],
-    [{
-      "size": 2,
-      "module": "smart-clock"
-    }, {
-      "size": 2,
-      "module": "smart-weather"
+      "module": "YOUR-MODULE"
     }]
   ]
 }

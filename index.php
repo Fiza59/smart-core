@@ -216,6 +216,7 @@ class Compiler
     {
         $jsList = [
             RESOURCE_DIR . '/js/jquery.min.js',
+            RESOURCE_DIR . '/js/artyom.min.js',
             RESOURCE_DIR . '/js/app.js'
         ];
 
