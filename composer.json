@@ -13,7 +13,7 @@
     },
     "require": {
         "twig/twig": "2.4.*",
-        "filp/whoops": "2.*",
+        "splitbrain/php-cli": "1.1.*",
         "leafo/lessphp": "0.4.0",
         "tedivm/jshrink": "~1.0"
     }
