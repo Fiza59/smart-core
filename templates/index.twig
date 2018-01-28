@@ -18,6 +18,9 @@
             {{ context.dashboard.settings.offset.bottom }}px
             {{ context.dashboard.settings.offset.left }}px;
         }
+        .action-container {
+            max-width: {{ context.dashboard.settings.maxWidth }}px;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +33,11 @@
                 {% endfor %}
             </div>
         {% endfor %}
+    </div>
+    <div class="action-container">
+        <div class="loading-container">
+            <div class="loader">Loading...</div>
+        </div>
     </div>
 </body>
 </html>

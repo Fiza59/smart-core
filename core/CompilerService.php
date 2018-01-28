@@ -85,9 +85,13 @@ class CompilerService
         $list = [];
 
         foreach ($modules as $module) {
-            $files = array_diff(scandir(MODULES_ROOT . '/' . $module . '/src/js'), array('.', '..', 'app.js'));
+            $files = array_diff(scandir(MODULES_ROOT . '/' . $module . '/src/js'), array('.', '..', 'app.js', 'intents.js'));
             foreach ($files as $file) {
                 $list[] = MODULES_ROOT . '/' . $module . '/src/js/' . $file;
+            }
+
+            if (is_file(MODULES_ROOT . '/' . $module . '/src/js/intents.js')) {
+                $list[] = MODULES_ROOT . '/' . $module . '/src/js/intents.js';
             }
 
             if (is_file(MODULES_ROOT . '/' . $module . '/src/js/app.js')) {

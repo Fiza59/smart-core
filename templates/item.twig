@@ -1,4 +1,7 @@
 <div class="grid-item {% block elementCls %}{% endblock %}">
+    {% if item.title %}
+        <span class="title">{{ item.title }}</span>
+    {% endif %}
     <div class="content">
         {% block content%}{% endblock %}
     </div>

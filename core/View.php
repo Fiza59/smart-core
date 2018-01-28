@@ -16,6 +16,7 @@ class View
 
     /**
      * View constructor.
+     * @param $context
      * @throws \Twig_Error_Loader
      */
     public function __construct($context)
@@ -58,7 +59,7 @@ class View
 
     /**
      * @param array $variables
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function assign(array $variables)
     {

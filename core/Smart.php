@@ -8,6 +8,7 @@ class Smart
     {
         $reader = new ConfigService();
         $gridRows = $reader->get(CONFIGS_ROOT . '/grid.json')->parse();
+
         $system = $reader->get(CONFIGS_ROOT . '/system.json')->parse();
         $dashboard = $reader->get(CONFIGS_ROOT . '/dashboard.json')->parse();
 
